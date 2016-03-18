@@ -1,6 +1,7 @@
 package wind;
-
+import javax.swing.JTable;
 import javax.swing.*;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -96,14 +97,10 @@ public class WIndows {
                     if (text.equals(rbatton2.getText())) {
                         rbatton2.setSelected(true);
                         textField3.setText(null);
-                    } else {
-                        if (text.equals(rbatton3.getText())) {
-                            rbatton3.setSelected(true);
-                            textField3.setText(null);
-                        } else {
-                            JOptionPane.showMessageDialog(WIndows, "Проверте текст");
-                        }
-                    }
+                    } else if (text.equals(rbatton3.getText())) {
+                        rbatton3.setSelected(true);
+                        textField3.setText(null);
+                    } else JOptionPane.showMessageDialog(WIndows, "Выбирете из предлоденных вариантов");
                 }
             }
 
@@ -131,18 +128,56 @@ public class WIndows {
                         if (text.equals(box3.getText())) {
                             box3.setSelected(!box3.isSelected());
                         } else {
-                            JOptionPane.showMessageDialog(WIndows, "Проверте текст");
+                            JOptionPane.showMessageDialog(WIndows, "Выбирете из предлоденных вариантов");
                         }
                     }
                 }
             }
-
         });
-        String[] colonsName={"First",
-                           "Second"};
-        JTable table;
-        table = new JTable(colonsName);
-
+        JTable table=new JTable(10,2);
+        JButton removeTextTask5=new JButton("Переместить в таблицу");
+        JButton removeIn2column=new JButton("Переместить во 2 столбец");
+        JButton removeIn1Column = new JButton("Переместить в 1 столбец");
+        JTextField textField5=new JTextField(25);
+        wind5.add(textField5);
+        wind5.add(table);
+        wind5.add(removeTextTask5);
+        wind5.add(removeIn2column);
+        wind5.add(removeIn1Column);
+        removeTextTask5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String text=textField5.getText();
+                for (int i=0;i<10;i++) {
+                    if (table.getValueAt(i, 0) == null && !text.isEmpty()) {
+                        table.setValueAt(text, i, 0);
+                        break;
+                    }
+                }
+            }
+        });
+        removeIn2column.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            Object text=table.getValueAt(table.getSelectedRow(),0);
+                if (text!=null) {
+                    table.setValueAt(text, table.getSelectedRow(), 1);
+                    table.setValueAt(null, table.getSelectedRow(), 0);
+                }
+                else JOptionPane.showMessageDialog(WIndows, "Выбранна пустая ячейка");
+            }
+        });
+        removeIn1Column.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            Object text=table.getValueAt(table.getSelectedRow(),1);
+                if(text!=null) {
+                    table.setValueAt(text, table.getSelectedRow(), 0);
+                    table.setValueAt(null, table.getSelectedRow(), 1);
+                }
+                else JOptionPane.showMessageDialog(WIndows, "Выбранна пустая ячейка");
+                }
+        });
         WIndows.add(tb);
         WIndows.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         WIndows.setSize(400, 400);
