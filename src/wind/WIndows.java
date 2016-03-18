@@ -1,7 +1,6 @@
 package wind;
-import javax.swing.JTable;
+
 import javax.swing.*;
-import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,20 +25,17 @@ public class WIndows {
         JTextField textField = new JTextField("", 20);
         textField.setSize(20, 40);
         wind1.add(textField);
-        DefaultComboBoxModel<String> mod = new DefaultComboBoxModel<String>();
-        JComboBox<String> textList = new JComboBox<String>(mod);
+        DefaultComboBoxModel<String> mod = new DefaultComboBoxModel<>();
+        JComboBox<String> textList = new JComboBox<>(mod);
         wind1.add(textList);
-        addInComboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String text = textField.getText();
-                if (!text.isEmpty()) {
-                    if (mod.getIndexOf(text) == -1) {
-                        mod.addElement(text);
-                        textField.setText(null);
-                    } else JOptionPane.showMessageDialog(WIndows, "Повторяющийся текст");
-                } else JOptionPane.showMessageDialog(WIndows, "Введите текст");
-            }
+        addInComboBox.addActionListener(e -> {
+            String text = textField.getText();
+            if (!text.isEmpty()) {
+                if (mod.getIndexOf(text) == -1) {
+                    mod.addElement(text);
+                    textField.setText(null);
+                } else JOptionPane.showMessageDialog(WIndows, "Повторяющийся текст");
+            } else JOptionPane.showMessageDialog(WIndows, "Введите текст");
         });
         JTextField textField2 = new JTextField("", 20);
         textField.setSize(20, 40);
@@ -51,26 +47,20 @@ public class WIndows {
         removeText.setLocation(40, 40);
         wind2.add(copyText);
         wind2.add(removeText);
-        copyText.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String text1 = textField2.getText();
-                if (text1.isEmpty()) {
-                    JOptionPane.showMessageDialog(WIndows, "Введите текст");
-                } else {
-                    copyText.setText(text1);
-                    textField2.setText(null);
-                }
+        copyText.addActionListener(e -> {
+            String text1 = textField2.getText();
+            if (text1.isEmpty()) {
+                JOptionPane.showMessageDialog(WIndows, "Введите текст");
+            } else {
+                copyText.setText(text1);
+                textField2.setText(null);
             }
         });
-        removeText.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String text1 = copyText.getText();
-                String text2 = removeText.getText();
-                removeText.setText(text1);
-                copyText.setText(text2);
-            }
+        removeText.addActionListener(e -> {
+            String text1 = copyText.getText();
+            String text2 = removeText.getText();
+            removeText.setText(text1);
+            copyText.setText(text2);
         });
         JButton checkRbatton = new JButton("Select");
         JRadioButton rbatton1 = new JRadioButton("1");
@@ -86,24 +76,20 @@ public class WIndows {
         wind3.add(rbatton2);
         wind3.add(rbatton3);
         wind3.add(textField3);
-        checkRbatton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String text = textField3.getText();
-                if (text.equals(rbatton1.getText())) {
-                    rbatton1.setSelected(true);
+        checkRbatton.addActionListener(e -> {
+            String text = textField3.getText();
+            if (text.equals(rbatton1.getText())) {
+                rbatton1.setSelected(true);
+                textField3.setText(null);
+            } else {
+                if (text.equals(rbatton2.getText())) {
+                    rbatton2.setSelected(true);
                     textField3.setText(null);
-                } else {
-                    if (text.equals(rbatton2.getText())) {
-                        rbatton2.setSelected(true);
-                        textField3.setText(null);
-                    } else if (text.equals(rbatton3.getText())) {
-                        rbatton3.setSelected(true);
-                        textField3.setText(null);
-                    } else JOptionPane.showMessageDialog(WIndows, "Выбирете из предлоденных вариантов");
-                }
+                } else if (text.equals(rbatton3.getText())) {
+                    rbatton3.setSelected(true);
+                    textField3.setText(null);
+                } else JOptionPane.showMessageDialog(WIndows, "Выбирете из предлоденных вариантов");
             }
-
         });
         JTextField textField4 = new JTextField(25);
         JButton checkCheckBox = new JButton("Select");
@@ -115,21 +101,18 @@ public class WIndows {
         wind4.add(box1);
         wind4.add(box2);
         wind4.add(box3);
-        checkCheckBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String text = textField4.getText();
-                if (text.equals(box1.getText())) {
-                    box1.setSelected(!box1.isSelected());
+        checkCheckBox.addActionListener(e -> {
+            String text = textField4.getText();
+            if (text.equals(box1.getText())) {
+                box1.setSelected(!box1.isSelected());
+            } else {
+                if (text.equals(box2.getText())) {
+                    box2.setSelected(!box2.isSelected());
                 } else {
-                    if (text.equals(box2.getText())) {
-                        box2.setSelected(!box2.isSelected());
+                    if (text.equals(box3.getText())) {
+                        box3.setSelected(!box3.isSelected());
                     } else {
-                        if (text.equals(box3.getText())) {
-                            box3.setSelected(!box3.isSelected());
-                        } else {
-                            JOptionPane.showMessageDialog(WIndows, "Выбирете из предлоденных вариантов");
-                        }
+                        JOptionPane.showMessageDialog(WIndows, "Выбирете из предлоденных вариантов");
                     }
                 }
             }
@@ -138,45 +121,45 @@ public class WIndows {
         JButton removeTextTask5=new JButton("Переместить в таблицу");
         JButton removeIn2column=new JButton("Переместить во 2 столбец");
         JButton removeIn1Column = new JButton("Переместить в 1 столбец");
+        JButton elochka = new JButton("Ёлочка");
         JTextField textField5=new JTextField(25);
         wind5.add(textField5);
         wind5.add(table);
         wind5.add(removeTextTask5);
         wind5.add(removeIn2column);
         wind5.add(removeIn1Column);
-        removeTextTask5.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String text=textField5.getText();
-                for (int i=0;i<10;i++) {
-                    if (table.getValueAt(i, 0) == null && !text.isEmpty()) {
-                        table.setValueAt(text, i, 0);
-                        break;
-                    }
+        wind5.add(elochka);
+        removeTextTask5.addActionListener(e -> {
+            String text=textField5.getText();
+            for (int i=0;i<11;i++) {
+                if (i==10){JOptionPane.showMessageDialog(WIndows, "Таблица заполнена");break;}
+                if (table.getValueAt(i, 0) == null && !text.isEmpty() && table.getValueAt(i, 1) == null ) {
+                    table.setValueAt(text, i, 0);
+                    break;
                 }
             }
         });
-        removeIn2column.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            Object text=table.getValueAt(table.getSelectedRow(),0);
-                if (text!=null) {
-                    table.setValueAt(text, table.getSelectedRow(), 1);
-                    table.setValueAt(null, table.getSelectedRow(), 0);
-                }
-                else JOptionPane.showMessageDialog(WIndows, "Выбранна пустая ячейка");
+        removeIn2column.addActionListener(e -> {
+        Object text=table.getValueAt(table.getSelectedRow(),0);
+            if (text!=null) {
+                table.setValueAt(text, table.getSelectedRow(), 1);
+                table.setValueAt(null, table.getSelectedRow(), 0);
             }
+            else JOptionPane.showMessageDialog(WIndows, "Выбранна пустая ячейка");
         });
-        removeIn1Column.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            Object text=table.getValueAt(table.getSelectedRow(),1);
-                if(text!=null) {
-                    table.setValueAt(text, table.getSelectedRow(), 0);
-                    table.setValueAt(null, table.getSelectedRow(), 1);
-                }
-                else JOptionPane.showMessageDialog(WIndows, "Выбранна пустая ячейка");
-                }
+        removeIn1Column.addActionListener(e -> {
+        Object text=table.getValueAt(table.getSelectedRow(),1);
+            if(text!=null) {
+                table.setValueAt(text, table.getSelectedRow(), 0);
+                table.setValueAt(null, table.getSelectedRow(), 1);
+            }
+            else JOptionPane.showMessageDialog(WIndows, "Выбранна пустая ячейка");
+            });
+        elochka.addActionListener(e -> {
+            Object text=table.getValueAt(table.getSelectedRow(),table.getSelectedColumn());
+                int j=table.getSelectedColumn();int i=table.getSelectedRow();
+                if (i==10 && j==0)i=0;
+                table.setValueAt(text, i+1, table.getSelectedColumn()+1);
         });
         WIndows.add(tb);
         WIndows.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
