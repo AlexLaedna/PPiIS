@@ -101,6 +101,7 @@ public class WIndows {
         wind4.add(box1);
         wind4.add(box2);
         wind4.add(box3);
+
         checkCheckBox.addActionListener(e -> {
             String text = textField4.getText();
             if (text.equals(box1.getText())) {
